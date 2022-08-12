@@ -9,6 +9,7 @@ public class Caterpillar extends Herbivore {
         setCountAnimal(1000);
         setMovePerStep(0);
         setMaxFoodForAnimal(0.0);
+        setName("Гусеница");
     }
 
     @Override

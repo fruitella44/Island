@@ -9,6 +9,7 @@ public class Sheep extends Herbivore {
         setCountAnimal(140);
         setMovePerStep(3);
         setMaxFoodForAnimal(15.0);
+        setName("Овца");
     }
 
     @Override

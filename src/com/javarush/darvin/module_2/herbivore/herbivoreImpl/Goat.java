@@ -9,6 +9,7 @@ public class Goat extends Herbivore {
         setCountAnimal(140);
         setMovePerStep(3);
         setMaxFoodForAnimal(10.0);
+        setName("Коза");
     }
 
     @Override

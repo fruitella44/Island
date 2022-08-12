@@ -9,6 +9,7 @@ public class Buffalo extends Herbivore {
         setCountAnimal(10);
         setMovePerStep(3);
         setMaxFoodForAnimal(100);
+        setName("Буйвол");
     }
 
     @Override

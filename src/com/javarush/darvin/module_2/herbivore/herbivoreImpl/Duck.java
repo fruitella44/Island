@@ -9,6 +9,7 @@ public class Duck extends Herbivore {
         setCountAnimal(200);
         setMovePerStep(4);
         setMaxFoodForAnimal(0.15);
+        setName("Утка");
     }
 
     @Override
