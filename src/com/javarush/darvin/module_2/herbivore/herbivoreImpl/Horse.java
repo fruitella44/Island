@@ -9,6 +9,7 @@ public class Horse extends Herbivore {
        setCountAnimal(20);
        setMovePerStep(4);
        setMaxFoodForAnimal(60.0);
+       setName("Лошадь");
     }
 
     @Override

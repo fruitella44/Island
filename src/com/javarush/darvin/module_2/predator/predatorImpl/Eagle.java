@@ -9,6 +9,7 @@ public class Eagle extends Predator {
         setCountAnimal(20);
         setMovePerStep(3);
         setMaxFoodForAnimal(1.0);
+        setName("Орел");
     }
 
     @Override

@@ -9,6 +9,7 @@ public class Mouse extends Herbivore {
         setCountAnimal(500);
         setMovePerStep(1);
         setMaxFoodForAnimal(0.01);
+        setName("Мышь");
     }
 
     @Override

@@ -9,6 +9,7 @@ public class Bear extends Predator {
         setCountAnimal(5);
         setMovePerStep(2);
         setMaxFoodForAnimal(80.0);
+        setName("Медведь");
     }
 
     @Override

@@ -9,6 +9,7 @@ public class Deer extends Herbivore {
         setCountAnimal(20);
         setMovePerStep(4);
         setMaxFoodForAnimal(50.0);
+        setName("Олень");
     }
 
     @Override

@@ -1,10 +1,11 @@
 package com.javarush.darvin.module_2;
 
-public abstract class Animal {
+public abstract class Animal<P> {
     private double weight;
     private int countAnimal;
     private int movePerStep;
     private double maxFoodForAnimal;
+    private String name;
 
     public abstract void eat();
     public abstract void reproduction();
@@ -26,6 +27,10 @@ public abstract class Animal {
         return maxFoodForAnimal;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public void setWeight(double weight) {
         this.weight = weight;
     }
@@ -40,5 +45,9 @@ public abstract class Animal {
 
     public void setMaxFoodForAnimal(double maxFoodForAnimal) {
         this.maxFoodForAnimal = maxFoodForAnimal;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
