@@ -12,9 +12,9 @@ public class Island {
     private final int HEIGHT = 20;
 
 
-    private Object[][] fields = new Object[WIDTH][HEIGHT];
-    private List<Object> plantsList = new ArrayList<>();
-    private List<Object> animalList = new ArrayList<>();
+    private final Object[][] fields = new Object[WIDTH][HEIGHT];
+    private final List<Object> plantsList = new ArrayList<>();
+    private final List<Object> animalList = new ArrayList<>();
 
 
     public Object[][] getFields() {
@@ -73,6 +73,7 @@ public class Island {
             getFields()[getRandomNumber(getWIDTH())][getRandomNumber(getHEIGHT())] = new Wolf();
             getFields()[getRandomNumber(getWIDTH())][getRandomNumber(getHEIGHT())] = new Buffalo();
             getFields()[getRandomNumber(getWIDTH())][getRandomNumber(getHEIGHT())] = new Caterpillar();
+            getFields()[getRandomNumber(getWIDTH())][getRandomNumber(getHEIGHT())] = new Duck();
             getFields()[getRandomNumber(getWIDTH())][getRandomNumber(getHEIGHT())] = new Deer();
             getFields()[getRandomNumber(getWIDTH())][getRandomNumber(getHEIGHT())] = new Goat();
             getFields()[getRandomNumber(getWIDTH())][getRandomNumber(getHEIGHT())] = new Hog();
