@@ -9,9 +9,4 @@ public abstract class Predator extends Animal {
 
     }
 
-    @Override
-    public abstract void reproduction();
-
-    @Override
-    public abstract void chooseTheWay();
 }

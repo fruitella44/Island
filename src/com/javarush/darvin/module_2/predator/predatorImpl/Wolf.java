@@ -9,7 +9,7 @@ public class Wolf extends Predator {
         setCountAnimal(30);
         setMovePerStep(3);
         setMaxFoodForAnimal(8.0);
-        setName("Волк");
+        setName("🐺");
     }
 
     @Override

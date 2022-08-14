@@ -1,41 +1,58 @@
 package com.javarush.darvin.module_2;
 
-public class Plants {
-    private double weight;
-    private int countPlants;
-    private int movePerStep;
-    private double maxFood;
+public class Plants extends Animal {
     public int UNKNOWN = 0;
 
+    public Plants() {
+        setWeight(1.0);
+        setCountAnimal(200);
+        setMovePerStep(UNKNOWN);
+        setMaxFoodForAnimal(UNKNOWN);
+        setName("\uD83C\uDF31");
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
+
+    @Override
+    public void eat() {
+
+    }
+
+    @Override
+    public void reproduction() {
+
+    }
+
+    @Override
+    public void chooseTheWay() {
+
+    }
+
+    @Override
     public double getWeight() {
-        return weight;
+        return super.getWeight();
     }
 
-    public int getCountPlants() {
-        return countPlants;
+    @Override
+    public int getCountAnimal() {
+        return super.getCountAnimal();
     }
 
+    @Override
     public int getMovePerStep() {
-        return movePerStep;
+        return super.getMovePerStep();
     }
 
-    public double getMaxFood() {
-        return maxFood;
+    @Override
+    public double getMaxFoodForAnimal() {
+        return super.getMaxFoodForAnimal();
     }
 
-    public void setWeight(double weight) {
-        this.weight = 1.0;
-    }
-
-    public void setCountPlants(int countPlants) {
-        this.countPlants = 200;
-    }
-
-    public void setMovePerStep(int movePerStep) {
-        this.movePerStep = UNKNOWN;
-    }
-
-    public void setMaxFood(double maxFood) {
-        this.maxFood = UNKNOWN;
+    @Override
+    public String getName() {
+        return super.getName();
     }
 }

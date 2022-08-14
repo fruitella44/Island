@@ -9,7 +9,7 @@ public class Snake extends Predator {
         setCountAnimal(30);
         setMovePerStep(1);
         setMaxFoodForAnimal(3.0);
-        setName("Удав");
+        setName("\uD83D\uDC0D");
     }
 
     @Override

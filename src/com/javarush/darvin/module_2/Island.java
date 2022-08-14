@@ -5,17 +5,19 @@ import com.javarush.darvin.module_2.predator.predatorImpl.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Island {
     private final int WIDTH = 100;
     private final int HEIGHT = 20;
 
-    private int[][] fields;
+
+    private Object[][] fields = new Object[WIDTH][HEIGHT];
     private List<Object> plantsList = new ArrayList<>();
     private List<Object> animalList = new ArrayList<>();
 
 
-    public int[][] getFields() {
+    public Object[][] getFields() {
         return fields;
     }
 
@@ -35,9 +37,6 @@ public class Island {
         return animalList;
     }
 
-    public void setFields(int[][] fields) {
-        this.fields = new int[getWIDTH()][getHEIGHT()];
-    }
 
     public void addPlants() {
         getPlantsList().add(new Plants());
@@ -59,5 +58,45 @@ public class Island {
         getAnimalList().add(new Mouse());
         getAnimalList().add(new Rabbit());
         getAnimalList().add(new Sheep());
+    }
+
+    public static int getRandomNumber(int maxNumber) {
+        return new Random().nextInt(maxNumber);
+    }
+
+    public void addObjectsIntoField() {
+        if (fields[getRandomNumber(getWIDTH())][getRandomNumber(getHEIGHT())] == null) {
+            fields[getRandomNumber(getWIDTH())][getRandomNumber(getHEIGHT())] = new Bear();
+            fields[getRandomNumber(getWIDTH())][getRandomNumber(getHEIGHT())] = new Eagle();
+            fields[getRandomNumber(getWIDTH())][getRandomNumber(getHEIGHT())] = new Fox();
+            fields[getRandomNumber(getWIDTH())][getRandomNumber(getHEIGHT())] = new Snake();
+            fields[getRandomNumber(getWIDTH())][getRandomNumber(getHEIGHT())] = new Wolf();
+            fields[getRandomNumber(getWIDTH())][getRandomNumber(getHEIGHT())] = new Buffalo();
+            fields[getRandomNumber(getWIDTH())][getRandomNumber(getHEIGHT())] = new Caterpillar();
+            fields[getRandomNumber(getWIDTH())][getRandomNumber(getHEIGHT())] = new Deer();
+            fields[getRandomNumber(getWIDTH())][getRandomNumber(getHEIGHT())] = new Goat();
+            fields[getRandomNumber(getWIDTH())][getRandomNumber(getHEIGHT())] = new Hog();
+            fields[getRandomNumber(getWIDTH())][getRandomNumber(getHEIGHT())] = new Horse();
+            fields[getRandomNumber(getWIDTH())][getRandomNumber(getHEIGHT())] = new Mouse();
+            fields[getRandomNumber(getWIDTH())][getRandomNumber(getHEIGHT())] = new Rabbit();
+            fields[getRandomNumber(getWIDTH())][getRandomNumber(getHEIGHT())] = new Sheep();
+        }
+
+        for (int x = 0; x < fields.length; x++) {
+            for (int y = 0; y < fields[x].length; y++) {
+                if (fields[x][y] == null) {
+                    fields[x][y] = new Plants();
+                }
+            }
+        }
+    }
+
+    public void printInfo() {
+        for (int x = 0; x < fields.length; x++) {
+            for (int y = 0; y < fields[x].length; y++) {
+                System.out.print(fields[x][y] + " ");
+            }
+            System.out.println();
+        }
     }
 }

@@ -1,6 +1,6 @@
 package com.javarush.darvin.module_2;
 
-public enum Weeks {
+public enum DayOfWeek {
     MONDAY,
     TUESDAY,
     WEDNESDAY,

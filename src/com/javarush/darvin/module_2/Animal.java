@@ -1,11 +1,16 @@
 package com.javarush.darvin.module_2;
 
-public abstract class Animal<P> {
+public abstract class Animal {
     private double weight;
     private int countAnimal;
     private int movePerStep;
     private double maxFoodForAnimal;
     private String name;
+
+    @Override
+    public String toString() {
+        return name;
+    }
 
     public abstract void eat();
     public abstract void reproduction();

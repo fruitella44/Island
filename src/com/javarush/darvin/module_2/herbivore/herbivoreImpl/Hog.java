@@ -9,7 +9,7 @@ public class Hog extends Herbivore {
         setCountAnimal(50);
         setMovePerStep(2);
         setMaxFoodForAnimal(50.0);
-        setName("Кабан");
+        setName("\uD83D\uDC17");
     }
 
     @Override

@@ -6,5 +6,7 @@ public class Main {
         Island island = new Island();
         island.addPlants();
         island.addAnimal();
+        island.addObjectsIntoField();
+        island.printInfo();
     }
 }

@@ -9,9 +9,4 @@ public abstract class Herbivore extends Animal {
 
     }
 
-    @Override
-    public abstract void reproduction();
-
-    @Override
-    public abstract void chooseTheWay();
 }

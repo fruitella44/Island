@@ -9,7 +9,7 @@ public class Rabbit extends Herbivore {
         setCountAnimal(150);
         setMovePerStep(2);
         setMaxFoodForAnimal(0.45);
-        setName("Кролик");
+        setName("\uD83D\uDC07");
     }
 
     @Override
