@@ -22,8 +22,4 @@ public class Hog extends Herbivore {
 
     }
 
-    @Override
-    public void chooseTheWay() {
-
-    }
 }

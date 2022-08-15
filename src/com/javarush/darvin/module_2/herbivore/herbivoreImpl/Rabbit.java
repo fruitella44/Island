@@ -22,8 +22,4 @@ public class Rabbit extends Herbivore {
 
     }
 
-    @Override
-    public void chooseTheWay() {
-
-    }
 }

@@ -27,11 +27,6 @@ public class Plants extends Animal {
     }
 
     @Override
-    public void chooseTheWay() {
-
-    }
-
-    @Override
     public double getWeight() {
         return super.getWeight();
     }

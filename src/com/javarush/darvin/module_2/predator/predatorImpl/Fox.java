@@ -23,8 +23,4 @@ public class Fox extends Predator {
 
     }
 
-    @Override
-    public void chooseTheWay() {
-
-    }
 }

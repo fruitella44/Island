@@ -22,9 +22,5 @@ public class Eagle extends Predator {
 
     }
 
-    @Override
-    public void chooseTheWay() {
-
-    }
 
 }

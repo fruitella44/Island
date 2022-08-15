@@ -17,10 +17,6 @@ public class Goat extends Herbivore {
 
     }
 
-    @Override
-    public void chooseTheWay() {
-
-    }
 
     @Override
     public void eat() {

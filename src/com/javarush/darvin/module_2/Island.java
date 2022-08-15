@@ -14,9 +14,9 @@ public class Island {
     private int newPositionY;
 
     private final Object[][] fields = new Object[WIDTH][HEIGHT];
-    private final List<Object> plantsList = new ArrayList<>();
-    private final List<Object> animalList = new ArrayList<>();
-
+    private final List<Plants> plantsList = new ArrayList<>();
+    private final List<Animal> animalList = new ArrayList<>();
+    private final List<Animal> animalsOnIsland = new ArrayList<>();
 
     public Object[][] getFields() {
         return fields;
@@ -40,7 +40,7 @@ public class Island {
 
 
     public void addPlants() {
-        getPlantsList().add(new Plants());
+        plantsList.add(new Plants());
     }
 
     public void addAnimal() {
@@ -74,7 +74,6 @@ public class Island {
 
             if (fields[width][height] == null) {
                 fields[width][height] = animal;
-                //System.out.println(animal.getName() + " adding to animalsOnIsland list");
                 animalsOnIsland.add(animal);
                 System.out.println(animal.getName() + " is on position " + getPosition(fields, animal));
             }
@@ -96,6 +95,104 @@ public class Island {
             }
             System.out.println();
         }
+    }
+
+    public void move() {
+
+        for (Animal animal : animalsOnIsland) {
+            System.out.println(animal.getName() + " starting to move");
+            String oldPosition = getPosition(fields, animal);
+
+            int positionX = Integer.parseInt(oldPosition.split(" ")[0]);
+            int positionY = Integer.parseInt(oldPosition.split(" ")[1]);
+
+            if (animal.getMovePerStep() > 0) {
+                switch (animal.chooseTheWay()) {
+                    case LEFT -> {
+                        System.out.println(animal.getName() + " picked the direction " + Animal.Direction.LEFT.name());
+                        if ((positionX - animal.getMovePerStep()) < 0) {
+                            newPositionX = WIDTH - (animal.getMovePerStep() - positionX);
+                            fields[newPositionX][positionY] = animal;
+                            fields[positionX][positionY] = new Plants();
+                        } else {
+                            newPositionX = positionX - animal.getMovePerStep();
+                            fields[newPositionX][positionY] = animal;
+                            fields[positionX][positionY] = new Plants();
+                        }
+
+                    }
+                    case RIGHT -> {
+                        System.out.println(animal.getName() + " picked the direction " + Animal.Direction.RIGHT.name());
+                        if ((positionX + animal.getMovePerStep()) >= WIDTH) {
+                            newPositionX = WIDTH - (animal.getMovePerStep() + positionX);
+                            fields[newPositionX][positionY] = animal;
+                            fields[positionX][positionY] = new Plants();
+                        } else {
+                            newPositionX = positionX + animal.getMovePerStep();
+                            fields[newPositionX][positionY] = animal;
+                            fields[positionX][positionY] = new Plants();
+                        }
+                    }
+                    case UP -> {
+                        System.out.println(animal.getName() + " picked the direction " + Animal.Direction.UP.name());
+                        if ((positionY - animal.getMovePerStep()) < 0) {
+                            newPositionY = HEIGHT - (animal.getMovePerStep() - positionY);
+                            fields[positionX][newPositionY] = animal;
+                            fields[positionX][positionY] = new Plants();
+                        } else {
+                            newPositionY = positionY - animal.getMovePerStep();
+                            fields[positionX][newPositionY] = animal;
+                            fields[positionX][positionY] = new Plants();
+                        }
+
+                    }
+                    case DOWN -> {
+                        System.out.println(animal.getName() + " picked the direction " + Animal.Direction.DOWN.name());
+                        if ((positionY + animal.getMovePerStep()) >= HEIGHT) {
+                            newPositionY = HEIGHT - (animal.getMovePerStep() + positionY);
+                            fields[positionX][newPositionY] = animal;
+                            fields[positionX][positionY] = new Plants();
+                        } else {
+                            newPositionY = positionY + animal.getMovePerStep();
+                            fields[positionX][newPositionY] = animal;
+                            fields[positionX][positionY] = new Plants();
+                        }
+
+                    }
+                    default -> {
+                        System.out.println("Direction was wrong");
+                    }
+                }
+
+            }
+        }
+    }
+
+    public void lifeCycle(long millis) {
+        for (int i = 0; i < DayOfWeek.values().length; i++) {
+            move();
+            System.out.println("Move was successful");
+            try {
+                Thread.sleep(millis);
+            } catch (InterruptedException exception) {
+              System.out.println("Interrupted exception has been occured " + exception);
+            }
+            printInfo();
+        }
+
+    }
+
+    public String getPosition(Object[][] animals, Animal positionOfTheAnimal) {
+
+        for (int x = 0; x < animals.length; x++) {
+            for (int y = 0; y < animals[x].length; y++) {
+
+                if (animals[x][y] == positionOfTheAnimal) {
+                    return x + " " + y;
+                }
+            }
+        }
+        return "Position of the Animal has not found";
     }
 
 }

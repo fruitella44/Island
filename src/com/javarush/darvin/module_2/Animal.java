@@ -3,6 +3,8 @@ package com.javarush.darvin.module_2;
 import java.util.Random;
 
 public abstract class Animal {
+    public enum Direction {LEFT, RIGHT, UP, DOWN}
+
     private double weight;
     private int countAnimal;
     private int movePerStep;
@@ -10,8 +12,8 @@ public abstract class Animal {
     private String name;
 
     public abstract void eat();
+
     public abstract void reproduction();
-    public abstract void chooseTheWay();
 
     public double getWeight() {
         return weight;

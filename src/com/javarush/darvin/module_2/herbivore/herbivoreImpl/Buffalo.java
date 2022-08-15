@@ -23,8 +23,4 @@ public class Buffalo extends Herbivore {
         super.eat();
     }
 
-    @Override
-    public void chooseTheWay() {
-
-    }
 }
