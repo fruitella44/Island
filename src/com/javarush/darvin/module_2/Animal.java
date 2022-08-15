@@ -7,11 +7,6 @@ public abstract class Animal {
     private double maxFoodForAnimal;
     private String name;
 
-    @Override
-    public String toString() {
-        return name;
-    }
-
     public abstract void eat();
     public abstract void reproduction();
     public abstract void chooseTheWay();
@@ -54,5 +49,10 @@ public abstract class Animal {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }

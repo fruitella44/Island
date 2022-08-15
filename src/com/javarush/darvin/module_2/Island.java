@@ -65,28 +65,16 @@ public class Island {
     }
 
     public void addObjectsIntoField() {
-        if (getFields()[getRandomNumber(getWIDTH())][getRandomNumber(getHEIGHT())] == null) {
-            getFields()[getRandomNumber(getWIDTH())][getRandomNumber(getHEIGHT())] = new Bear();
-            getFields()[getRandomNumber(getWIDTH())][getRandomNumber(getHEIGHT())] = new Eagle();
-            getFields()[getRandomNumber(getWIDTH())][getRandomNumber(getHEIGHT())] = new Fox();
-            getFields()[getRandomNumber(getWIDTH())][getRandomNumber(getHEIGHT())] = new Snake();
-            getFields()[getRandomNumber(getWIDTH())][getRandomNumber(getHEIGHT())] = new Wolf();
-            getFields()[getRandomNumber(getWIDTH())][getRandomNumber(getHEIGHT())] = new Buffalo();
-            getFields()[getRandomNumber(getWIDTH())][getRandomNumber(getHEIGHT())] = new Caterpillar();
-            getFields()[getRandomNumber(getWIDTH())][getRandomNumber(getHEIGHT())] = new Duck();
-            getFields()[getRandomNumber(getWIDTH())][getRandomNumber(getHEIGHT())] = new Deer();
-            getFields()[getRandomNumber(getWIDTH())][getRandomNumber(getHEIGHT())] = new Goat();
-            getFields()[getRandomNumber(getWIDTH())][getRandomNumber(getHEIGHT())] = new Hog();
-            getFields()[getRandomNumber(getWIDTH())][getRandomNumber(getHEIGHT())] = new Horse();
-            getFields()[getRandomNumber(getWIDTH())][getRandomNumber(getHEIGHT())] = new Mouse();
-            getFields()[getRandomNumber(getWIDTH())][getRandomNumber(getHEIGHT())] = new Rabbit();
-            getFields()[getRandomNumber(getWIDTH())][getRandomNumber(getHEIGHT())] = new Sheep();
+        for (Object animals : getAnimalList()) {
+            if (getFields()[getRandomNumber(getWIDTH())][getRandomNumber(getHEIGHT())] == null) {
+                getFields()[getRandomNumber(getWIDTH())][getRandomNumber(getHEIGHT())] = animals;
+            }
         }
 
         for (int x = 0; x < getFields().length; x++) {
             for (int y = 0; y < getFields()[x].length; y++) {
                 if (getFields()[x][y] == null) {
-                    getFields()[x][y] = new Plants();
+                    getFields()[x][y] = getPlantsList();
                 }
             }
         }
@@ -100,4 +88,5 @@ public class Island {
             System.out.println();
         }
     }
+
 }
