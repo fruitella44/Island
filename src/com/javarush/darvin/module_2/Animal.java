@@ -1,5 +1,7 @@
 package com.javarush.darvin.module_2;
 
+import java.util.Random;
+
 public abstract class Animal {
     private double weight;
     private int countAnimal;
@@ -55,4 +57,22 @@ public abstract class Animal {
     public String toString() {
         return name;
     }
+
+    public Direction chooseTheWay() {
+        Random random = new Random();
+        int direction = random.nextInt(4);
+        switch (direction) {
+            case 0:
+                return Direction.LEFT;
+            case 1:
+                return Direction.RIGHT;
+            case 2:
+                return Direction.UP;
+            case 3:
+                return Direction.DOWN;
+            default:
+                return null;
+        }
+    }
+
 }

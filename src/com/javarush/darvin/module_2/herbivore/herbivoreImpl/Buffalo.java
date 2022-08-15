@@ -1,5 +1,6 @@
 package com.javarush.darvin.module_2.herbivore.herbivoreImpl;
 
+import com.javarush.darvin.module_2.Animal;
 import com.javarush.darvin.module_2.herbivore.Herbivore;
 
 public class Buffalo extends Herbivore {

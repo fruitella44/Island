@@ -22,8 +22,5 @@ public class Caterpillar extends Herbivore {
 
     }
 
-    @Override
-    public void chooseTheWay() {
 
-    }
 }
