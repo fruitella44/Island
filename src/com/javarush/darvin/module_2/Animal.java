@@ -3,7 +3,7 @@ package com.javarush.darvin.module_2;
 import java.util.Random;
 
 public abstract class Animal {
-    public enum Direction {LEFT, RIGHT, UP, DOWN}
+    public enum Direction {LEFT, RIGHT, UP, DOWN, STAY}
 
     private double weight;
     private int countAnimal;
@@ -72,6 +72,8 @@ public abstract class Animal {
                 return Direction.UP;
             case 3:
                 return Direction.DOWN;
+            case 4:
+                return Direction.STAY;
             default:
                 return null;
         }
