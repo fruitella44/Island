@@ -7,7 +7,7 @@ public class Caterpillar extends Herbivore {
     public Caterpillar() {
         setWeight(0.01);
         setCountAnimal(1000);
-        setMovePerStep(0);
+        setMovePerStep(1);
         setMaxFoodForAnimal(0.0);
         setName("\uD83D\uDC1B");
     }

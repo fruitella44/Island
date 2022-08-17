@@ -1,6 +1,7 @@
 package com.javarush.darvin.module_2;
 
 import com.javarush.darvin.module_2.herbivore.herbivoreImpl.*;
+import com.javarush.darvin.module_2.predator.Predator;
 import com.javarush.darvin.module_2.predator.predatorImpl.*;
 
 import java.awt.*;
@@ -9,10 +10,11 @@ import java.util.List;
 import java.util.Random;
 
 public class Island {
-    private final int WIDTH = 20;
+    private final int WIDTH = 100;
     private final int HEIGHT = 20;
     private int newPositionX;
     private int newPositionY;
+    private static final Rectangle rectangle = new Rectangle(0, 0, 100, 20);
 
     private final Object[][] fields = new Object[WIDTH][HEIGHT];
     private final List<Plants> plantsList = new ArrayList<>();
@@ -49,17 +51,17 @@ public class Island {
         animalList.add(new Eagle());
         animalList.add(new Fox());
         animalList.add(new Snake());
-//        animalList.add(new Wolf());
-//        animalList.add(new Buffalo());
-//        animalList.add(new Caterpillar());
-//        animalList.add(new Deer());
-//        animalList.add(new Duck());
-//        animalList.add(new Goat());
-//        animalList.add(new Hog());
-//        animalList.add(new Horse());
-//        animalList.add(new Mouse());
-//        animalList.add(new Rabbit());
-//        animalList.add(new Sheep());
+        animalList.add(new Wolf());
+        animalList.add(new Buffalo());
+        animalList.add(new Caterpillar());
+        animalList.add(new Deer());
+        animalList.add(new Duck());
+        animalList.add(new Goat());
+        animalList.add(new Hog());
+        animalList.add(new Horse());
+        animalList.add(new Mouse());
+        animalList.add(new Rabbit());
+        animalList.add(new Sheep());
     }
 
     public static int getRandomNumber(int maxNumber) {
@@ -75,13 +77,15 @@ public class Island {
             if (fields[width][height] == null) {
                 fields[width][height] = animal;
                 animalsOnIsland.add(animal);
-                System.out.println(animal.getName() + " is on position " + getPosition(fields, animal));
+                System.out.println(animal.getName() + " is on the position " + getPosition(fields, animal));
             }
             //Дописать else если два животных выпадают на одно поле после генерации рандома
         }
+    }
 
-        for (int y = 0; y < fields.length; y++) {
-            for (int x = 0; x < fields[y].length; x++) {
+    public void addPlantsOnTheField() {
+        for (int x = 0; x < fields.length; x++) {
+            for (int y = 0; y < fields[x].length; y++) {
                 if (fields[x][y] == null) {
                     fields[x][y] = new Plants();
                 }
@@ -90,8 +94,8 @@ public class Island {
     }
 
     public void printInfo() {
-        for (int y = 0; y < fields.length; y++) {
-            for (int x = 0; x < fields[y].length; x++) {
+        for (int x = 0; x < fields.length; x++) {
+            for (int y = 0; y < fields[x].length; y++) {
                 System.out.print(fields[x][y] + " ");
             }
             System.out.println();
@@ -107,25 +111,29 @@ public class Island {
 
                 int positionX = Integer.parseInt(oldPosition.split(" ")[0]);
                 int positionY = Integer.parseInt(oldPosition.split(" ")[1]);
-                System.out.println(animal.getName() + " текущая позиция " + getPosition(fields, animal));
+                Point point = new Point(positionX, positionY);
 
-                if (animal.getMovePerStep() > 0) {
+                System.out.println(animal.getName() + " is on the position " + getPosition(fields, animal));
+
+                if (animal.getMovePerStep() >= 0) {
+
                     switch (animal.chooseTheWay()) {
                         case LEFT -> {
                             System.out.println(animal.getName() + " picked the direction " + Animal.Direction.LEFT.name());
-                            if ((positionX - animal.getMovePerStep()) <= 0) {
-                                //newPositionX = WIDTH - (animal.getMovePerStep() - positionX);
+
+                            if ((positionX - animal.getMovePerStep()) <= 0 && rectangle.contains(point)) {
                                 newPositionX = 0;
                             } else {
                                 newPositionX = positionX - animal.getMovePerStep();
                             }
+
                             fields[newPositionX][positionY] = animal;
                             fields[positionX][positionY] = new Plants();
-
                         }
                         case RIGHT -> {
                             System.out.println(animal.getName() + " picked the direction " + Animal.Direction.RIGHT.name());
-                            if ((positionX + animal.getMovePerStep()) >= WIDTH) {
+
+                            if ((positionX + animal.getMovePerStep()) >= WIDTH && rectangle.contains(point)) {
                                 newPositionX = WIDTH;
                             } else {
                                 newPositionX = positionX + animal.getMovePerStep();
@@ -136,7 +144,8 @@ public class Island {
                         }
                         case UP -> {
                             System.out.println(animal.getName() + " picked the direction " + Animal.Direction.UP.name());
-                            if ((positionY - animal.getMovePerStep()) <= 0) {
+
+                            if ((positionY - animal.getMovePerStep()) <= 0 && rectangle.contains(point)) {
                                 newPositionY = 0;
                             } else {
                                 newPositionY = positionY - animal.getMovePerStep();
@@ -144,11 +153,11 @@ public class Island {
 
                             fields[positionX][newPositionY] = animal;
                             fields[positionX][positionY] = new Plants();
-
                         }
                         case DOWN -> {
                             System.out.println(animal.getName() + " picked the direction " + Animal.Direction.DOWN.name());
-                            if ((positionY + animal.getMovePerStep()) >= HEIGHT) {
+
+                            if ((positionY + animal.getMovePerStep()) >= HEIGHT && rectangle.contains(point)) {
                                 newPositionY = HEIGHT;
                             } else {
                                 newPositionY = positionY + animal.getMovePerStep();
@@ -156,29 +165,23 @@ public class Island {
 
                             fields[positionX][newPositionY] = animal;
                             fields[positionX][positionY] = new Plants();
-
-                        }
-                        case STAY -> {
-                            System.out.println(animal.getName() + " picked the direction " + Animal.Direction.STAY.name());
-                            fields[positionX][positionY] = animal;
                         }
                         default -> {
-                            System.out.println("Direction was wrong");
+                            System.out.println("Direction has not been picked");
                         }
                     }
-
-
                 }
             }
         } catch (ArrayIndexOutOfBoundsException exception) {
-            System.out.println("Граница поля " + exception);
+            System.out.println("Animal is staying on the same position");
         }
     }
 
     public void lifeCycle(long millis) {
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < DayOfWeek.values().length; i++) {
             move();
             System.out.println("Move was successful");
+
             try {
                 Thread.sleep(millis);
             } catch (InterruptedException exception) {

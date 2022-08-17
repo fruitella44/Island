@@ -72,8 +72,6 @@ public abstract class Animal {
                 return Direction.UP;
             case 3:
                 return Direction.DOWN;
-            case 4:
-                return Direction.STAY;
             default:
                 return null;
         }
