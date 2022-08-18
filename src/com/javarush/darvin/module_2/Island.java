@@ -1,179 +1,202 @@
 package com.javarush.darvin.module_2;
 
 import com.javarush.darvin.module_2.herbivore.herbivoreImpl.*;
-import com.javarush.darvin.module_2.predator.Predator;
 import com.javarush.darvin.module_2.predator.predatorImpl.*;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Iterator;
 import java.util.Random;
 
 public class Island {
-    private final int WIDTH = 100;
-    private final int HEIGHT = 20;
+    private static final int WIDTH = 10;
+    private static final int HEIGHT = 10;
+    private static final Rectangle boundsOfIsland = new Rectangle(0, 0, WIDTH, HEIGHT);
+
+    private static final ArrayList<Animal>[][] island = new ArrayList[WIDTH][HEIGHT];
     private int newPositionX;
     private int newPositionY;
-    private static final Rectangle rectangle = new Rectangle(0, 0, 100, 20);
+    private String CREATURES = "";
+    public static Random random = new Random();
 
-    private final Object[][] fields = new Object[WIDTH][HEIGHT];
-    private final List<Plants> plantsList = new ArrayList<>();
-    private final List<Animal> animalList = new ArrayList<>();
-    private final List<Animal> animalsOnIsland = new ArrayList<>();
-
-    public Object[][] getFields() {
-        return fields;
-    }
-
-    public int getWIDTH() {
-        return WIDTH;
-    }
-
-    public int getHEIGHT() {
-        return HEIGHT;
-    }
-
-    public List<Plants> getPlantsList() {
-        return plantsList;
-    }
-
-    public List<Animal> getAnimalList() {
-        return animalList;
-    }
-
-
-    public void addPlants() {
-        plantsList.add(new Plants());
-    }
-
-    public void addAnimal() {
-        animalList.add(new Bear());
-        animalList.add(new Eagle());
-        animalList.add(new Fox());
-        animalList.add(new Snake());
-        animalList.add(new Wolf());
-        animalList.add(new Buffalo());
-        animalList.add(new Caterpillar());
-        animalList.add(new Deer());
-        animalList.add(new Duck());
-        animalList.add(new Goat());
-        animalList.add(new Hog());
-        animalList.add(new Horse());
-        animalList.add(new Mouse());
-        animalList.add(new Rabbit());
-        animalList.add(new Sheep());
-    }
-
-    public static int getRandomNumber(int maxNumber) {
-        return new Random().nextInt(maxNumber);
-    }
-
-    public void addObjectsIntoField() {
-
-        for (Animal animal : animalList) {
-            int width = getRandomNumber(WIDTH);
-            int height = getRandomNumber(HEIGHT);
-
-            if (fields[width][height] == null) {
-                fields[width][height] = animal;
-                animalsOnIsland.add(animal);
-                System.out.println(animal.getName() + " is on the position " + getPosition(fields, animal));
+    public void addObjectsIntoFields() {
+        for (int i = 0; i < island.length; i++) {
+            for (int j = 0; j < island[i].length; j++) {
+                island[i][j] = new ArrayList<>();
             }
-            //Дописать else если два животных выпадают на одно поле после генерации рандома
         }
-    }
 
-    public void addPlantsOnTheField() {
-        for (int x = 0; x < fields.length; x++) {
-            for (int y = 0; y < fields[x].length; y++) {
-                if (fields[x][y] == null) {
-                    fields[x][y] = new Plants();
-                }
-            }
+        //рандомно заполняю ячейки существами предварительно созданным методом
+        Random random = new Random();
+        for (int i = 0; i < 16; i++) {
+            int randomWidth = random.nextInt(WIDTH);
+            int randomHeight = random.nextInt(HEIGHT);
+
+            island[randomWidth][randomHeight].add(getRandomAnimal());
         }
     }
 
     public void printInfo() {
-        for (int x = 0; x < fields.length; x++) {
-            for (int y = 0; y < fields[x].length; y++) {
-                System.out.print(fields[x][y] + " ");
+        //вывожу всё это барахло на экран
+        for (int x = 0; x < island.length; x++) {
+            for (int y = 0; y < island[x].length; y++) {
+                System.out.print("[");
+
+                for (Animal animal : island[x][y]) {
+                    CREATURES = CREATURES + animal.getName() + " ";
+                }
+                System.out.print(CREATURES.trim());
+                System.out.print("]");
             }
             System.out.println();
         }
     }
 
+
+    //рандомная генерация существа
+    public static Animal getRandomAnimal() {
+
+        switch (random.nextInt(16)) {
+            case 0:
+                return new Plants();
+            case 1:
+                return new Eagle();
+            case 2:
+                return new Fox();
+            case 3:
+                return new Snake();
+            case 4:
+                return new Wolf();
+            case 5:
+                return new Buffalo();
+            case 6:
+                return new Caterpillar();
+            case 7:
+                return new Deer();
+            case 8:
+                return new Duck();
+            case 9:
+                return new Goat();
+            case 10:
+                return new Hog();
+            case 11:
+                return new Horse();
+            case 12:
+                return new Mouse();
+            case 13:
+                return new Rabbit();
+            case 14:
+                return new Sheep();
+            case 15:
+                return new Bear();
+            default:
+                return null;
+        }
+    }
+
     public void move() {
+
         try {
 
-            for (Animal animal : animalsOnIsland) {
-                System.out.println(animal.getName() + " starting to move");
-                String oldPosition = getPosition(fields, animal);
+            for (int x = 0; x < island.length; x++) {
+                for (int y = 0; y < island[x].length; y++) {
+                    Iterator<Animal> animalIterator = island[x][y].iterator();
 
-                int positionX = Integer.parseInt(oldPosition.split(" ")[0]);
-                int positionY = Integer.parseInt(oldPosition.split(" ")[1]);
-                Point point = new Point(positionX, positionY);
+                    while (animalIterator.hasNext()) {
+                        Animal animal = animalIterator.next();
+                        System.out.println(animal.getName() + " starting to move");
+                        String oldPosition = getPosition(island, animal);
 
-                System.out.println(animal.getName() + " is on the position " + getPosition(fields, animal));
+                        int positionX = Integer.parseInt(oldPosition.split(" ")[0]);
+                        int positionY = Integer.parseInt(oldPosition.split(" ")[1]);
 
-                if (animal.getMovePerStep() >= 0) {
+                        System.out.println(animal.getName() + " is on the position " + getPosition(island, animal));
 
-                    switch (animal.chooseTheWay()) {
-                        case LEFT -> {
-                            System.out.println(animal.getName() + " picked the direction " + Animal.Direction.LEFT.name());
+                        if (animal.getMovePerStep() > 0) {
 
-                            if ((positionX - animal.getMovePerStep()) <= 0 && rectangle.contains(point)) {
-                                newPositionX = 0;
-                            } else {
-                                newPositionX = positionX - animal.getMovePerStep();
+                            for(int moves = 0; moves < 1; moves++) {
+                                switch (animal.chooseTheWay()) {
+                                    case LEFT -> {
+                                        System.out.println(animal.getName() + " picked the direction " + Animal.Direction.LEFT.name());
+
+                                        //движение по оси X влево
+                                        newPositionX = positionX - animal.getMovePerStep();
+                                        Point newCoordinate = new Point(newPositionX, positionY);
+
+                                        if (boundsOfIsland.contains(newCoordinate)) {
+                                            System.out.println("TEST: old position:" + positionX + "," + positionY + " new position:" + newPositionX + "," + positionY);
+                                            island[newPositionX][positionY].add(animal);
+                                            animalIterator.remove();
+                                            break;
+                                        } else {
+                                            System.out.println("Животное решило остаться на месте");
+                                        }
+                                    }
+                                    case RIGHT -> {
+                                        System.out.println(animal.getName() + " picked the direction " + Animal.Direction.RIGHT.name());
+
+                                        //движение по оси X вправо
+                                        newPositionX = positionX + animal.getMovePerStep();
+                                        Point newCoordinate = new Point(newPositionX, positionY);
+
+                                        if (boundsOfIsland.contains(newCoordinate)) {
+                                            System.out.println("TEST: old position:" + positionX + "," + positionY + " new position:" + newPositionX + "," + positionY);
+                                            island[newPositionX][positionY].add(animal);
+                                            animalIterator.remove();
+                                            break;
+                                        } else {
+                                            System.out.println("Животное решило остаться на месте");
+                                        }
+
+
+                                    }
+                                    case UP -> {
+                                        System.out.println(animal.getName() + " picked the direction " + Animal.Direction.UP.name());
+
+                                        //движение по оси Y вверх
+                                        newPositionY = positionY - animal.getMovePerStep();
+                                        Point newCoordinate = new Point(newPositionX, positionY);
+
+                                        if (boundsOfIsland.contains(newCoordinate)) {
+                                            System.out.println("TEST: old position:" + positionX + "," + positionY + " new position:" + positionX + "," + newPositionY);
+                                            island[positionX][newPositionY].add(animal);
+                                            animalIterator.remove();
+                                            break;
+                                        } else {
+                                            System.out.println("Животное решило остаться на месте");
+                                        }
+
+                                    }
+                                    case DOWN -> {
+                                        System.out.println(animal.getName() + " picked the direction " + Animal.Direction.DOWN.name());
+
+                                        //движение по оси Y вниз
+                                        newPositionY = positionY + animal.getMovePerStep();
+                                        Point newCoordinate = new Point(newPositionX, positionY);
+
+                                        if (boundsOfIsland.contains(newCoordinate)) {
+                                            System.out.println("TEST: old position:" + positionX + "," + positionY + " new position:" + positionX + "," + newPositionY);
+                                            island[positionX][newPositionY].add(animal);
+                                            animalIterator.remove();
+                                            break;
+                                        } else {
+                                            System.out.println("Животное решило остаться на месте");
+                                        }
+
+                                    }
+                                    default -> {
+                                        System.out.println("Direction has not been picked");
+                                    }
+                                }
                             }
-
-                            fields[newPositionX][positionY] = animal;
-                            fields[positionX][positionY] = new Plants();
-                        }
-                        case RIGHT -> {
-                            System.out.println(animal.getName() + " picked the direction " + Animal.Direction.RIGHT.name());
-
-                            if ((positionX + animal.getMovePerStep()) >= WIDTH && rectangle.contains(point)) {
-                                newPositionX = WIDTH;
-                            } else {
-                                newPositionX = positionX + animal.getMovePerStep();
-                            }
-
-                            fields[newPositionX][positionY] = animal;
-                            fields[positionX][positionY] = new Plants();
-                        }
-                        case UP -> {
-                            System.out.println(animal.getName() + " picked the direction " + Animal.Direction.UP.name());
-
-                            if ((positionY - animal.getMovePerStep()) <= 0 && rectangle.contains(point)) {
-                                newPositionY = 0;
-                            } else {
-                                newPositionY = positionY - animal.getMovePerStep();
-                            }
-
-                            fields[positionX][newPositionY] = animal;
-                            fields[positionX][positionY] = new Plants();
-                        }
-                        case DOWN -> {
-                            System.out.println(animal.getName() + " picked the direction " + Animal.Direction.DOWN.name());
-
-                            if ((positionY + animal.getMovePerStep()) >= HEIGHT && rectangle.contains(point)) {
-                                newPositionY = HEIGHT;
-                            } else {
-                                newPositionY = positionY + animal.getMovePerStep();
-                            }
-
-                            fields[positionX][newPositionY] = animal;
-                            fields[positionX][positionY] = new Plants();
-                        }
-                        default -> {
-                            System.out.println("Direction has not been picked");
                         }
                     }
                 }
             }
+
+
         } catch (ArrayIndexOutOfBoundsException exception) {
-            System.out.println("Animal is staying on the same position");
+            System.out.println("Animal was stood on the same position");
         }
     }
 
@@ -185,24 +208,25 @@ public class Island {
             try {
                 Thread.sleep(millis);
             } catch (InterruptedException exception) {
-              System.out.println("Interrupted exception has been occured " + exception);
+                System.out.println("Interrupted exception has been occurred " + exception);
             }
             printInfo();
         }
 
     }
 
-    public String getPosition(Object[][] animals, Animal positionOfTheAnimal) {
+    public String getPosition(ArrayList<Animal>[][] animals, Animal positionOfTheAnimal) {
 
         for (int x = 0; x < animals.length; x++) {
             for (int y = 0; y < animals[x].length; y++) {
 
-                if (animals[x][y] == positionOfTheAnimal) {
-                    return x + " " + y;
+                for (Animal animal : animals[x][y]) {
+                    if (animal == positionOfTheAnimal) {
+                        return x + " " + y;
+                    }
                 }
             }
         }
         return "Position of the Animal has not found";
     }
-
 }

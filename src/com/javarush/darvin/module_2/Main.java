@@ -4,15 +4,9 @@ public class Main {
 
     public static void main(String[] args) {
         Island island = new Island();
-        island.addAnimal();
-        island.addPlants();
-        island.addObjectsIntoField();
-        island.addPlantsOnTheField();
-
+        island.addObjectsIntoFields();
         island.printInfo();
 
-
-        //test
         island.lifeCycle(1000);
     }
 }

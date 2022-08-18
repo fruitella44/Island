@@ -1,9 +1,10 @@
 package com.javarush.darvin.module_2;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public abstract class Animal {
-    public enum Direction {LEFT, RIGHT, UP, DOWN, STAY}
+    public enum Direction {LEFT, RIGHT, UP, DOWN}
 
     private double weight;
     private int countAnimal;

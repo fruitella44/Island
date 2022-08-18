@@ -1,5 +1,7 @@
 package com.javarush.darvin.module_2;
 
+import java.util.ArrayList;
+
 public class Plants extends Animal {
     public int UNKNOWN = 0;
 
@@ -9,11 +11,6 @@ public class Plants extends Animal {
         setMovePerStep(UNKNOWN);
         setMaxFoodForAnimal(UNKNOWN);
         setName("\uD83C\uDF31");
-    }
-
-    @Override
-    public String toString() {
-        return super.toString();
     }
 
     @Override

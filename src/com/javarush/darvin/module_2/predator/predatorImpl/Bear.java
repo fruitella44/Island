@@ -1,10 +1,8 @@
 package com.javarush.darvin.module_2.predator.predatorImpl;
 
-import com.javarush.darvin.module_2.Island;
 import com.javarush.darvin.module_2.predator.Predator;
 
 public class Bear extends Predator {
-    public static Island island = new Island();
 
     public Bear() {
         setWeight(500.0);
