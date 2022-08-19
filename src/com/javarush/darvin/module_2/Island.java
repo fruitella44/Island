@@ -1,6 +1,7 @@
 package com.javarush.darvin.module_2;
 
 import com.javarush.darvin.module_2.herbivore.herbivoreImpl.*;
+import com.javarush.darvin.module_2.predator.Predator;
 import com.javarush.darvin.module_2.predator.predatorImpl.*;
 
 import java.awt.*;
@@ -13,7 +14,7 @@ public class Island {
     private static final int HEIGHT = 10;
     private static final Rectangle boundsOfIsland = new Rectangle(0, 0, WIDTH, HEIGHT);
 
-    private static final ArrayList<Animal>[][] island = new ArrayList[WIDTH][HEIGHT];
+    public static final ArrayList<Animal>[][] island = new ArrayList[WIDTH][HEIGHT];
     private int newPositionX;
     private int newPositionY;
     private String CREATURES = "";
@@ -27,7 +28,6 @@ public class Island {
         }
 
         //рандомно заполняю ячейки существами предварительно созданным методом
-        Random random = new Random();
         for (int i = 0; i < 16; i++) {
             int randomWidth = random.nextInt(WIDTH);
             int randomHeight = random.nextInt(HEIGHT);
@@ -56,42 +56,25 @@ public class Island {
     //рандомная генерация существа
     public static Animal getRandomAnimal() {
 
-        switch (random.nextInt(16)) {
-            case 0:
-                return new Plants();
-            case 1:
-                return new Eagle();
-            case 2:
-                return new Fox();
-            case 3:
-                return new Snake();
-            case 4:
-                return new Wolf();
-            case 5:
-                return new Buffalo();
-            case 6:
-                return new Caterpillar();
-            case 7:
-                return new Deer();
-            case 8:
-                return new Duck();
-            case 9:
-                return new Goat();
-            case 10:
-                return new Hog();
-            case 11:
-                return new Horse();
-            case 12:
-                return new Mouse();
-            case 13:
-                return new Rabbit();
-            case 14:
-                return new Sheep();
-            case 15:
-                return new Bear();
-            default:
-                return null;
-        }
+        return switch (random.nextInt(16)) {
+            case 0 -> new Plants();
+            case 1 -> new Eagle();
+            case 2 -> new Fox();
+            case 3 -> new Snake();
+            case 4 -> new Wolf();
+            case 5 -> new Buffalo();
+            case 6 -> new Caterpillar();
+            case 7 -> new Deer();
+            case 8 -> new Duck();
+            case 9 -> new Goat();
+            case 10 -> new Hog();
+            case 11 -> new Horse();
+            case 12 -> new Mouse();
+            case 13 -> new Rabbit();
+            case 14 -> new Sheep();
+            case 15 -> new Bear();
+            default -> null;
+        };
     }
 
     public void move() {
@@ -128,8 +111,6 @@ public class Island {
                                             island[newPositionX][positionY].add(animal);
                                             animalIterator.remove();
                                             break;
-                                        } else {
-                                            System.out.println("Животное решило остаться на месте");
                                         }
                                     }
                                     case RIGHT -> {
@@ -144,11 +125,7 @@ public class Island {
                                             island[newPositionX][positionY].add(animal);
                                             animalIterator.remove();
                                             break;
-                                        } else {
-                                            System.out.println("Животное решило остаться на месте");
                                         }
-
-
                                     }
                                     case UP -> {
                                         System.out.println(animal.getName() + " picked the direction " + Animal.Direction.UP.name());
@@ -162,10 +139,7 @@ public class Island {
                                             island[positionX][newPositionY].add(animal);
                                             animalIterator.remove();
                                             break;
-                                        } else {
-                                            System.out.println("Животное решило остаться на месте");
                                         }
-
                                     }
                                     case DOWN -> {
                                         System.out.println(animal.getName() + " picked the direction " + Animal.Direction.DOWN.name());
@@ -179,10 +153,7 @@ public class Island {
                                             island[positionX][newPositionY].add(animal);
                                             animalIterator.remove();
                                             break;
-                                        } else {
-                                            System.out.println("Животное решило остаться на месте");
                                         }
-
                                     }
                                     default -> {
                                         System.out.println("Direction has not been picked");
@@ -201,9 +172,11 @@ public class Island {
     }
 
     public void lifeCycle(long millis) {
+
         for (int i = 0; i < DayOfWeek.values().length; i++) {
             move();
             System.out.println("Move was successful");
+            getRandomAnimal().eat();
 
             try {
                 Thread.sleep(millis);
@@ -229,4 +202,5 @@ public class Island {
         }
         return "Position of the Animal has not found";
     }
+
 }
