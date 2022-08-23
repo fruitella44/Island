@@ -1,7 +1,6 @@
 package com.javarush.darvin.module_2;
 
 import com.javarush.darvin.module_2.herbivore.herbivoreImpl.*;
-import com.javarush.darvin.module_2.predator.Predator;
 import com.javarush.darvin.module_2.predator.predatorImpl.*;
 
 import java.awt.*;
@@ -13,12 +12,16 @@ public class Island {
     private static final int WIDTH = 10;
     private static final int HEIGHT = 10;
     private static final Rectangle boundsOfIsland = new Rectangle(0, 0, WIDTH, HEIGHT);
+    private static ArrayList<Animal>[][] island = new ArrayList[WIDTH][HEIGHT];
 
-    public static final ArrayList<Animal>[][] island = new ArrayList[WIDTH][HEIGHT];
     private int newPositionX;
     private int newPositionY;
     private String CREATURES = "";
     public static Random random = new Random();
+
+    public static ArrayList<Animal>[][] getIsland() {
+        return island;
+    }
 
     public void addObjectsIntoFields() {
         for (int i = 0; i < island.length; i++) {
@@ -87,7 +90,6 @@ public class Island {
 
                     while (animalIterator.hasNext()) {
                         Animal animal = animalIterator.next();
-                        System.out.println(animal.getName() + " starting to move");
                         String oldPosition = getPosition(island, animal);
 
                         int positionX = Integer.parseInt(oldPosition.split(" ")[0]);
@@ -100,7 +102,6 @@ public class Island {
                             for(int moves = 0; moves < 1; moves++) {
                                 switch (animal.chooseTheWay()) {
                                     case LEFT -> {
-                                        System.out.println(animal.getName() + " picked the direction " + Animal.Direction.LEFT.name());
 
                                         //движение по оси X влево
                                         newPositionX = positionX - animal.getMovePerStep();
@@ -110,11 +111,9 @@ public class Island {
                                             System.out.println("TEST: old position:" + positionX + "," + positionY + " new position:" + newPositionX + "," + positionY);
                                             island[newPositionX][positionY].add(animal);
                                             animalIterator.remove();
-                                            break;
                                         }
                                     }
                                     case RIGHT -> {
-                                        System.out.println(animal.getName() + " picked the direction " + Animal.Direction.RIGHT.name());
 
                                         //движение по оси X вправо
                                         newPositionX = positionX + animal.getMovePerStep();
@@ -124,11 +123,9 @@ public class Island {
                                             System.out.println("TEST: old position:" + positionX + "," + positionY + " new position:" + newPositionX + "," + positionY);
                                             island[newPositionX][positionY].add(animal);
                                             animalIterator.remove();
-                                            break;
                                         }
                                     }
                                     case UP -> {
-                                        System.out.println(animal.getName() + " picked the direction " + Animal.Direction.UP.name());
 
                                         //движение по оси Y вверх
                                         newPositionY = positionY - animal.getMovePerStep();
@@ -138,11 +135,9 @@ public class Island {
                                             System.out.println("TEST: old position:" + positionX + "," + positionY + " new position:" + positionX + "," + newPositionY);
                                             island[positionX][newPositionY].add(animal);
                                             animalIterator.remove();
-                                            break;
                                         }
                                     }
                                     case DOWN -> {
-                                        System.out.println(animal.getName() + " picked the direction " + Animal.Direction.DOWN.name());
 
                                         //движение по оси Y вниз
                                         newPositionY = positionY + animal.getMovePerStep();
@@ -152,7 +147,6 @@ public class Island {
                                             System.out.println("TEST: old position:" + positionX + "," + positionY + " new position:" + positionX + "," + newPositionY);
                                             island[positionX][newPositionY].add(animal);
                                             animalIterator.remove();
-                                            break;
                                         }
                                     }
                                     default -> {
@@ -176,7 +170,9 @@ public class Island {
         for (int i = 0; i < DayOfWeek.values().length; i++) {
             move();
             System.out.println("Move was successful");
+
             getRandomAnimal().eat();
+            System.out.println("Eat was successful");
 
             try {
                 Thread.sleep(millis);
