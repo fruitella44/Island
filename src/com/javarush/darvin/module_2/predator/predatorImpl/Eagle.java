@@ -13,15 +13,4 @@ public class Eagle extends Predator {
         setName("\uD83E\uDD85");
     }
 
-    @Override
-    public void eat() {
-        super.eat();
-    }
-
-    @Override
-    public void reproduction() {
-
-    }
-
-
 }

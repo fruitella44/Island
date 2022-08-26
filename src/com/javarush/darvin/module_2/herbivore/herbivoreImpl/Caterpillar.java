@@ -12,15 +12,6 @@ public class Caterpillar extends Herbivore {
         setName("\uD83D\uDC1B");
     }
 
-    @Override
-    public void eat() {
-        super.eat();
-    }
-
-    @Override
-    public void reproduction() {
-
-    }
 
 
 }

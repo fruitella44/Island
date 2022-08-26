@@ -12,14 +12,4 @@ public class Duck extends Herbivore {
         setName("\uD83E\uDD86");
     }
 
-    @Override
-    public void eat() {
-        super.eat();
-    }
-
-    @Override
-    public void reproduction() {
-
-    }
-
 }

@@ -12,15 +12,4 @@ public class Wolf extends Predator {
         setName("🐺");
     }
 
-    @Override
-    public void eat() {
-        super.eat();
-    }
-
-    @Override
-    public void reproduction() {
-
-    }
-
-
 }

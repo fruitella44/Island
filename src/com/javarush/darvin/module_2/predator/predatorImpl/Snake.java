@@ -12,15 +12,5 @@ public class Snake extends Predator {
         setName("\uD83D\uDC0D");
     }
 
-    @Override
-    public void eat() {
-        super.eat();
-    }
-
-    @Override
-    public void reproduction() {
-
-    }
-
 
 }

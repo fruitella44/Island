@@ -1,6 +1,5 @@
 package com.javarush.darvin.module_2;
 
-
 public class Plants extends Animal {
     public int UNKNOWN = 0;
 
@@ -15,9 +14,17 @@ public class Plants extends Animal {
     @Override
     public void eat() {}
 
-    @Override
     public void reproduction() {
+        for (int x = 0; x < Island.getIsland().length; x++) {
+            for (int y = 0; y < Island.getIsland()[x].length; y++) {
 
+                for (Animal animal : Island.getIsland()[x][y]) {
+                    if (animal instanceof Plants) {
+                        Island.addObjectsIntoFields();
+                    }
+                }
+            }
+        }
     }
 
 }

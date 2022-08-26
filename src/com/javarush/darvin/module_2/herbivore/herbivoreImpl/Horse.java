@@ -12,15 +12,4 @@ public class Horse extends Herbivore {
        setName("\uD83D\uDC0E");
     }
 
-    @Override
-    public void eat() {
-        super.eat();
-    }
-
-    @Override
-    public void reproduction() {
-
-    }
-
-
 }

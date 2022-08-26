@@ -1,5 +1,4 @@
 package com.javarush.darvin.module_2.predator.predatorImpl;
-
 import com.javarush.darvin.module_2.predator.Predator;
 
 public class Bear extends Predator {
@@ -10,16 +9,6 @@ public class Bear extends Predator {
         setMovePerStep(2);
         setMaxFoodForAnimal(80.0);
         setName("\uD83D\uDC3B");
-    }
-
-    @Override
-    public void eat() {
-        super.eat();
-    }
-
-    @Override
-    public void reproduction() {
-
     }
 
 }

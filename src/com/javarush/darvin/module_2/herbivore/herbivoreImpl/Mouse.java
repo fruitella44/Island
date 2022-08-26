@@ -12,14 +12,4 @@ public class Mouse extends Herbivore {
         setName("\uD83D\uDC01");
     }
 
-    @Override
-    public void eat() {
-        super.eat();
-    }
-
-    @Override
-    public void reproduction() {
-
-    }
-
 }

@@ -10,9 +10,11 @@ public abstract class Animal {
     private int movePerStep;
     private double maxFoodForAnimal;
     private String name;
+    private int positionX = 0;
+    private int positionY = 0;
+    private int COUNTER;
 
     public abstract void eat();
-
     public abstract void reproduction();
 
     public double getWeight() {
@@ -55,6 +57,10 @@ public abstract class Animal {
         this.name = name;
     }
 
+    public int getCOUNTER() {
+       return COUNTER--;
+    }
+
     @Override
     public String toString() {
         return name;
@@ -75,6 +81,21 @@ public abstract class Animal {
             default:
                 return null;
         }
+    }
+
+
+    public String getPosition() {
+        for (int x = 0; x < Island.getIsland().length; x++) {
+            for (int y = 0; y < Island.getIsland()[x].length; y++) {
+
+                for (Animal animal : Island.getIsland()[x][y]) {
+                    if (animal == this) {
+                        return x + " " + y;
+                    }
+                }
+            }
+        }
+        return positionX + " " + positionY;
     }
 
 }

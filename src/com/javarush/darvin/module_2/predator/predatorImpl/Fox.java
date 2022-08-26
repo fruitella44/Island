@@ -13,14 +13,4 @@ public class Fox extends Predator {
 
     }
 
-    @Override
-    public void eat() {
-        super.eat();
-    }
-
-    @Override
-    public void reproduction() {
-
-    }
-
 }

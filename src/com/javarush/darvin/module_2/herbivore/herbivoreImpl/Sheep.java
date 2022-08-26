@@ -11,15 +11,4 @@ public class Sheep extends Herbivore {
         setMaxFoodForAnimal(15.0);
         setName("\uD83D\uDC11");
     }
-
-    @Override
-    public void eat() {
-        super.eat();
-    }
-
-    @Override
-    public void reproduction() {
-
-    }
-
 }

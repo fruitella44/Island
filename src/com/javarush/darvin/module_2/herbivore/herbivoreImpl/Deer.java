@@ -12,14 +12,5 @@ public class Deer extends Herbivore {
         setName("\uD83E\uDD8C");
     }
 
-    @Override
-    public void eat() {
-        super.eat();
-    }
-
-    @Override
-    public void reproduction() {
-
-    }
 
 }

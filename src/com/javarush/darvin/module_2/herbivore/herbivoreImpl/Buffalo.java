@@ -12,14 +12,4 @@ public class Buffalo extends Herbivore {
         setName("\uD83D\uDC03");
     }
 
-    @Override
-    public void reproduction() {
-
-    }
-
-    @Override
-    public void eat() {
-        super.eat();
-    }
-
 }

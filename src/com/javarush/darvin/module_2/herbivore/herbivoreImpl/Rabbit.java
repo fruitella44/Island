@@ -12,14 +12,4 @@ public class Rabbit extends Herbivore {
         setName("\uD83D\uDC07");
     }
 
-    @Override
-    public void eat() {
-        super.eat();
-    }
-
-    @Override
-    public void reproduction() {
-
-    }
-
 }

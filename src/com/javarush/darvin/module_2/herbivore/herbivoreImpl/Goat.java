@@ -12,14 +12,4 @@ public class Goat extends Herbivore {
         setName("\uD83D\uDC10");
     }
 
-    @Override
-    public void reproduction() {
-
-    }
-
-
-    @Override
-    public void eat() {
-        super.eat();
-    }
 }
