@@ -43,8 +43,8 @@ public abstract class Herbivore extends Animal {
             Animal animal = animalIterator.next();
 
             if (animal.getName().equals(this.getName())) {
-                int herbivoreCount = this.getCountAnimal() + counter++;
-                System.out.println("Born new Animal " + this.getName() + " " + herbivoreCount);
+                int animalCount = this.getCountAnimal() + counter++;
+                System.out.println("Born new Animal " + this.getName() + " " + animalCount);
             }
         }
     }

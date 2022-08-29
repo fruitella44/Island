@@ -21,7 +21,7 @@ public class Island {
 
     private static final Rectangle BOUNDS_OF_ISLAND = new Rectangle(0, 0, WIDTH, HEIGHT);
     private static ArrayList<Animal>[][] island = new ArrayList[WIDTH][HEIGHT];
-    private final ExecutorService service = Executors.newScheduledThreadPool(3);
+    private final ExecutorService service = Executors.newCachedThreadPool();
 
 
     public static ArrayList<Animal>[][] getIsland() {
@@ -159,8 +159,21 @@ public class Island {
     public void lifeCycle(long millis) {
 
         for (int i = 0; i < DAYS; i++) {
-            move();
-            checkAnimalPosition();
+            service.submit(new Runnable() {
+                @Override
+                public void run() {
+                    move();
+                }
+            });
+
+            service.submit(new Runnable() {
+                @Override
+                public void run() {
+                    checkAnimalPosition();
+                }
+            });
+//            move();
+//            checkAnimalPosition();
 
             try {
                 Thread.sleep(millis);
@@ -169,8 +182,9 @@ public class Island {
             }
 
             printInfo();
-
         }
+
+        service.shutdownNow();
     }
 
 
