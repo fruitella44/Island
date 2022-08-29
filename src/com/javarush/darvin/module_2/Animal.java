@@ -12,7 +12,8 @@ public abstract class Animal {
     private String name;
     private int positionX = 0;
     private int positionY = 0;
-    private int COUNTER;
+    private Random random = new Random();
+    private final int CHANCE_TO_BORN = 2;
 
     public abstract void eat();
     public abstract void reproduction();
@@ -57,17 +58,21 @@ public abstract class Animal {
         this.name = name;
     }
 
-    public int getCOUNTER() {
-       return COUNTER++;
-    }
-
     @Override
     public String toString() {
         return name;
     }
 
+    public Random getRandom() {
+        return random;
+    }
+
+    public int getCHANCE_TO_BORN() {
+        return CHANCE_TO_BORN;
+    }
+
     public Direction chooseTheWay() {
-        Random random = new Random();
+
         int direction = random.nextInt(4);
         switch (direction) {
             case 0:

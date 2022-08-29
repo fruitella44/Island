@@ -15,6 +15,7 @@ public class Island {
     private static final int HEIGHT = 5;
     private int newPositionX;
     private int newPositionY;
+
     private static Random random = new Random();
     private static final int TYPE_OF_ANIMAL = 16;
     private final int DAYS = 10;
@@ -172,8 +173,6 @@ public class Island {
                     checkAnimalPosition();
                 }
             });
-//            move();
-//            checkAnimalPosition();
 
             try {
                 Thread.sleep(millis);
@@ -184,19 +183,32 @@ public class Island {
             printInfo();
         }
 
-        service.shutdownNow();
     }
 
 
     private void checkAnimalPosition() {
-        for (int x = 0; x < Island.getIsland().length; x++) {
-            for (int y = 0; y < Island.getIsland()[x].length; y++) {
+        for (ArrayList<Animal>[] islandLists : island) {
+            for (ArrayList<Animal> animalList : islandLists) {
 
-                for (Animal animal : Island.getIsland()[x][y]) {
-                    animal.eat();
-                    animal.reproduction();
+                for (Animal animal : animalList) {
+                    service.submit(new Runnable() {
+                        @Override
+                        public void run() {
+                            animal.eat();
+                        }
+                    });
+
+                    service.submit(new Runnable() {
+                        @Override
+                        public void run() {
+                            animal.reproduction();
+                        }
+                    });
+
                 }
             }
         }
+
     }
+
 }

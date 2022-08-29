@@ -4,19 +4,24 @@ import com.javarush.darvin.module_2.Animal;
 import com.javarush.darvin.module_2.Island;
 import com.javarush.darvin.module_2.predator.Predator;
 
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public abstract class Herbivore extends Animal {
-    private String currentPosition = getPosition();
-    private int positionX = Integer.parseInt(currentPosition.split(" ")[0]);
-    private int positionY = Integer.parseInt(currentPosition.split(" ")[1]);
+    private String CURRENT_POSITION;
+    private int POSITION_X;
+    private int POSITION_Y;
     private int counter;
 
     public void eat() {
-        ArrayList<Animal> animalsList = Island.getIsland()[positionX][positionY];
+        CURRENT_POSITION = getPosition();
+        POSITION_X = Integer.parseInt(CURRENT_POSITION.split(" ")[0]);
+        POSITION_Y = Integer.parseInt(CURRENT_POSITION.split(" ")[1]);
+
+        ArrayList<Animal> animalsList = Island.getIsland()[POSITION_X][POSITION_Y];
         List<Animal> copyAnimalList = new CopyOnWriteArrayList<>(animalsList);
         Iterator<Animal> animalIterator = copyAnimalList.iterator();
 
@@ -28,24 +33,30 @@ public abstract class Herbivore extends Animal {
                 System.out.println(animal.getName() + " has eaten by " + this.getName());
                 copyAnimalList.remove(animal);
 
-                int plantsCount = getCountAnimal() - getCOUNTER();
-                System.out.println("Plants was eaten " + plantsCount);
+                counter++;
+                System.out.println("Plants was eaten " + counter);
             }
         }
+
     }
 
     public void reproduction() {
-        ArrayList<Animal> animalsList = Island.getIsland()[positionX][positionY];
-        List<Animal> copyAnimalList = new CopyOnWriteArrayList<>(animalsList);
-        Iterator<Animal> animalIterator = copyAnimalList.iterator();
+        for (int x = 0; x < Island.getIsland().length; x++) {
+            for (int y = 0; y < Island.getIsland()[x].length; y++) {
 
-        while (animalIterator.hasNext()) {
-            Animal animal = animalIterator.next();
+                for (Animal animal : Island.getIsland()[x][y]) {
+                    if (Island.getIsland()[x][y] == null && animal instanceof Herbivore && animal.getName().equals(this.getName())) {
 
-            if (animal.getName().equals(this.getName())) {
-                int animalCount = this.getCountAnimal() + counter++;
-                System.out.println("Born new Animal " + this.getName() + " " + animalCount);
+                        switch (getRandom().nextInt(getCHANCE_TO_BORN())) {
+                            case 0:
+                                return;
+                            case 1:
+                                Island.getIsland()[POSITION_X][POSITION_Y].add(animal);
+                        }
+                    }
+                }
             }
         }
     }
+
 }
