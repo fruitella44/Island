@@ -58,7 +58,7 @@ public abstract class Animal {
     }
 
     public int getCOUNTER() {
-       return COUNTER--;
+       return COUNTER++;
     }
 
     @Override
