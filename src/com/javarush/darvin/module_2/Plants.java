@@ -27,9 +27,9 @@ public class Plants extends Animal {
         for (int x = 0; x < Island.getIsland().length; x++) {
             for (int y = 0; y < Island.getIsland()[x].length; y++) {
 
-                for (Animal animal : Island.getIsland()[x][y]) {
-                    if (Island.getIsland()[x][y] == null && animal instanceof Plants && animal.getName().equals(this.getName())) {
-                        Island.getIsland()[POSITION_X][POSITION_Y].add(animal);
+                for (Animal plant : Island.getIsland()[x][y]) {
+                    if (Island.getIsland()[x][y] == null && plant instanceof Plants && plant.getName().equals(this.getName())) {
+                        Island.getIsland()[POSITION_X][POSITION_Y].add(plant);
                     }
                 }
             }
