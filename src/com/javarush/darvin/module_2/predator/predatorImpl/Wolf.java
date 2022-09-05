@@ -11,5 +11,4 @@ public class Wolf extends Predator {
         setMaxFoodForAnimal(8.0);
         setName("🐺");
     }
-
 }

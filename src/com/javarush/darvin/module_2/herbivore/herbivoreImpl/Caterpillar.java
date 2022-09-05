@@ -11,7 +11,4 @@ public class Caterpillar extends Herbivore {
         setMaxFoodForAnimal(0.0);
         setName("\uD83D\uDC1B");
     }
-
-
-
 }

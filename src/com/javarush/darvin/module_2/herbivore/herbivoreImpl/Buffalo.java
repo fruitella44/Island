@@ -11,5 +11,4 @@ public class Buffalo extends Herbivore {
         setMaxFoodForAnimal(100);
         setName("\uD83D\uDC03");
     }
-
 }

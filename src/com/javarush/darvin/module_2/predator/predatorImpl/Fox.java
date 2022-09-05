@@ -10,7 +10,5 @@ public class Fox extends Predator {
         setMovePerStep(2);
         setMaxFoodForAnimal(2.0);
         setName("\uD83E\uDD8A");
-
     }
-
 }

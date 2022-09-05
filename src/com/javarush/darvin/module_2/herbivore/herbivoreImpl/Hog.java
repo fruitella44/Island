@@ -11,5 +11,4 @@ public class Hog extends Herbivore {
         setMaxFoodForAnimal(50.0);
         setName("\uD83D\uDC17");
     }
-
 }

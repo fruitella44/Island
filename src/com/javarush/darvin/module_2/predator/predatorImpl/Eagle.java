@@ -12,5 +12,4 @@ public class Eagle extends Predator {
         setMaxFoodForAnimal(1.0);
         setName("\uD83E\uDD85");
     }
-
 }

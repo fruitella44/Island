@@ -19,20 +19,22 @@ public class Island {
     private static Random random = new Random();
     private static final int TYPE_OF_ANIMAL = 16;
     private final int DAYS = 10;
+    private final int ACTIONS = 2;
 
     private static final Rectangle BOUNDS_OF_ISLAND = new Rectangle(0, 0, WIDTH, HEIGHT);
-    private static ArrayList<Animal>[][] island = new ArrayList[WIDTH][HEIGHT];
+    private static ArrayList<Animal>[][] field = new ArrayList[WIDTH][HEIGHT];
     private final ExecutorService service = Executors.newCachedThreadPool();
 
 
-    public static ArrayList<Animal>[][] getIsland() {
-        return island;
+    public static ArrayList<Animal>[][] getField() {
+
+        return field;
     }
 
-    public static void addObjectsIntoFields() {
-        for (int x = 0; x < island.length; x++) {
-            for (int y = 0; y < island[x].length; y++) {
-                island[x][y] = new ArrayList<>();
+    public static void addCreatureIntoField() {
+        for (int x = 0; x < field.length; x++) {
+            for (int y = 0; y < field[x].length; y++) {
+                field[x][y] = new ArrayList<>();
             }
         }
 
@@ -40,18 +42,18 @@ public class Island {
             int randomWidth = random.nextInt(WIDTH);
             int randomHeight = random.nextInt(HEIGHT);
 
-            island[randomWidth][randomHeight].add(getRandomAnimal());
+            field[randomWidth][randomHeight].add(getRandomAnimal());
         }
     }
 
     private void printInfo() {
         String creatures = "";
 
-        for (int x = 0; x < island.length; x++) {
-            for (int y = 0; y < island[x].length; y++) {
+        for (int x = 0; x < field.length; x++) {
+            for (int y = 0; y < field[x].length; y++) {
                 System.out.print("[");
 
-                for (Animal animal : island[x][y]) {
+                for (Animal animal : field[x][y]) {
                     creatures = creatures + animal.getName() + " ";
                 }
                 System.out.print(creatures.trim());
@@ -85,13 +87,13 @@ public class Island {
         };
     }
 
-    private void move() {
+    public void move() {
 
         try {
 
-            for (int x = 0; x < island.length; x++) {
-                for (int y = 0; y < island[x].length; y++) {
-                    Iterator<Animal> animalIterator = island[x][y].iterator();
+            for (int x = 0; x < field.length; x++) {
+                for (int y = 0; y < field[x].length; y++) {
+                    Iterator<Animal> animalIterator = field[x][y].iterator();
 
                     while (animalIterator.hasNext()) {
                         Animal animal = animalIterator.next();
@@ -100,7 +102,6 @@ public class Island {
                         int positionX = Integer.parseInt(currentPosition.split(" ")[0]);
                         int positionY = Integer.parseInt(currentPosition.split(" ")[1]);
 
-
                         if (animal.getMovePerStep() > 0) {
                             switch (animal.chooseTheWay()) {
                                 case LEFT -> {
@@ -108,27 +109,25 @@ public class Island {
                                     Point newCoordinate = new Point(newPositionX, positionY);
 
                                     if (BOUNDS_OF_ISLAND.contains(newCoordinate)) {
-                                        island[newPositionX][positionY].add(animal);
+                                        field[newPositionX][positionY].add(animal);
                                         animalIterator.remove();
                                     }
                                 }
-
                                 case RIGHT -> {
                                     newPositionX = positionX + animal.getMovePerStep();
                                     Point newCoordinate = new Point(newPositionX, positionY);
 
                                     if (BOUNDS_OF_ISLAND.contains(newCoordinate)) {
-                                        island[newPositionX][positionY].add(animal);
+                                        field[newPositionX][positionY].add(animal);
                                         animalIterator.remove();
                                     }
                                 }
-
                                 case UP -> {
                                     newPositionY = positionY - animal.getMovePerStep();
                                     Point newCoordinate = new Point(newPositionX, positionY);
 
                                     if (BOUNDS_OF_ISLAND.contains(newCoordinate)) {
-                                        island[positionX][newPositionY].add(animal);
+                                        field[positionX][newPositionY].add(animal);
                                         animalIterator.remove();
                                     }
                                 }
@@ -137,21 +136,17 @@ public class Island {
                                     Point newCoordinate = new Point(newPositionX, positionY);
 
                                     if (BOUNDS_OF_ISLAND.contains(newCoordinate)) {
-                                        island[positionX][newPositionY].add(animal);
+                                        field[positionX][newPositionY].add(animal);
                                         animalIterator.remove();
                                     }
                                 }
 
-                                default -> {
-                                    System.out.println("Direction has not been picked");
-                                }
+                                default -> System.out.println("Direction has not been picked");
                             }
                         }
                     }
                 }
             }
-
-
         } catch (ArrayIndexOutOfBoundsException exception) {
             System.out.println("Animal was stood on the same position");
         }
@@ -160,19 +155,8 @@ public class Island {
     public void lifeCycle(long millis) {
 
         for (int i = 0; i < DAYS; i++) {
-            service.submit(new Runnable() {
-                @Override
-                public void run() {
-                    move();
-                }
-            });
-
-            service.submit(new Runnable() {
-                @Override
-                public void run() {
-                    checkAnimalPosition();
-                }
-            });
+            service.submit(this::move);
+            service.submit(this::doAction);
 
             try {
                 Thread.sleep(millis);
@@ -185,30 +169,26 @@ public class Island {
 
     }
 
+    private void doAction() {
+        for (int i = 0; i < ACTIONS; i++) {
+            checkAnimalPosition();
+        }
+    }
 
     private void checkAnimalPosition() {
-        for (ArrayList<Animal>[] islandLists : island) {
-            for (ArrayList<Animal> animalList : islandLists) {
 
-                for (Animal animal : animalList) {
-                    service.submit(new Runnable() {
-                        @Override
-                        public void run() {
-                            animal.eat();
-                        }
-                    });
+        for (int i = 0; i < ACTIONS; i++) {
 
-                    service.submit(new Runnable() {
-                        @Override
-                        public void run() {
-                            animal.reproduction();
-                        }
-                    });
+            for (ArrayList<Animal>[] islandLists : field) {
+                for (ArrayList<Animal> animalList : islandLists) {
 
+                    for (Animal animal : animalList) {
+                        service.submit(animal::eat);
+                        service.submit(animal::reproduction);
+                    }
                 }
             }
         }
-
     }
 
 }

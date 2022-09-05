@@ -20,37 +20,37 @@ public abstract class Predator extends Animal {
         POSITION_X = Integer.parseInt(CURRENT_POSITION.split(" ")[0]);
         POSITION_Y = Integer.parseInt(CURRENT_POSITION.split(" ")[1]);
 
-        ArrayList<Animal> animalsList = Island.getIsland()[POSITION_X][POSITION_Y];
+        ArrayList<Animal> animalsList = Island.getField()[POSITION_X][POSITION_Y];
         List<Animal> copyAnimalList = new CopyOnWriteArrayList<>(animalsList);
         Iterator<Animal> animalIterator = copyAnimalList.iterator();
 
         while (animalIterator.hasNext()) {
             Animal animal = animalIterator.next();
-            //System.out.println(this.getName() + " has chance to be eaten by " + this.getName());
 
             if (!(animal instanceof Predator) && !(animal instanceof Plants)) {
-                System.out.println(animal.getName() + " has eaten by " + this.getName());
                 copyAnimalList.remove(animal);
-
                 counter++;
-                System.out.println("Animal was eaten " + counter);
+
+                getBuilder().append(animal.getName()).append(" has eaten by ").append(this.getName());
+                getBuilder().append("\n");
+                getBuilder().append("Animal was eaten ").append(counter);
+                getBuilder().append("\n");
             }
         }
-
     }
 
     public void reproduction() {
-        for (int x = 0; x < Island.getIsland().length; x++) {
-            for (int y = 0; y < Island.getIsland()[x].length; y++) {
+        for (int x = 0; x < Island.getField().length; x++) {
+            for (int y = 0; y < Island.getField()[x].length; y++) {
 
-                for (Animal animal : Island.getIsland()[x][y]) {
-                    if (Island.getIsland()[x][y] == null && animal instanceof Predator && animal.getName().equals(this.getName())) {
+                for (Animal animal : Island.getField()[x][y]) {
+                    if (Island.getField()[x][y] == null && animal instanceof Predator && animal.getName().equals(this.getName())) {
 
                         switch (getRandom().nextInt(getCHANCE_TO_BORN())) {
                             case 0:
                                 return;
                             case 1:
-                                Island.getIsland()[POSITION_X][POSITION_Y].add(animal);
+                                Island.getField()[POSITION_X][POSITION_Y].add(animal);
                         }
                     }
                 }

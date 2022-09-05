@@ -16,7 +16,6 @@ public class Plants extends Animal {
         setName("\uD83C\uDF31");
     }
 
-    @Override
     public void eat() {}
 
     public void reproduction() {
@@ -24,16 +23,18 @@ public class Plants extends Animal {
         POSITION_X = Integer.parseInt(CURRENT_POSITION.split(" ")[0]);
         POSITION_Y = Integer.parseInt(CURRENT_POSITION.split(" ")[1]);
 
-        for (int x = 0; x < Island.getIsland().length; x++) {
-            for (int y = 0; y < Island.getIsland()[x].length; y++) {
+        for (int x = 0; x < Island.getField().length; x++) {
+            for (int y = 0; y < Island.getField()[x].length; y++) {
 
-                for (Animal plant : Island.getIsland()[x][y]) {
-                    if (Island.getIsland()[x][y] == null && plant instanceof Plants && plant.getName().equals(this.getName())) {
-                        Island.getIsland()[POSITION_X][POSITION_Y].add(plant);
+                for (Animal plant : Island.getField()[x][y]) {
+                    if (Island.getField()[x][y] == null && plant instanceof Plants && plant.getName().equals(this.getName())) {
+                        Island.getField()[POSITION_X][POSITION_Y].add(plant);
                     }
                 }
             }
         }
     }
+
+
 
 }

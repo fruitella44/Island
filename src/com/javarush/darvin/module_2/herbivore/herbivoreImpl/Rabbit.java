@@ -11,5 +11,4 @@ public class Rabbit extends Herbivore {
         setMaxFoodForAnimal(0.45);
         setName("\uD83D\uDC07");
     }
-
 }

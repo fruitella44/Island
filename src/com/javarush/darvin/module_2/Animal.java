@@ -3,8 +3,6 @@ package com.javarush.darvin.module_2;
 import java.util.Random;
 
 public abstract class Animal {
-    public enum Direction {LEFT, RIGHT, UP, DOWN}
-
     private double weight;
     private int countAnimal;
     private int movePerStep;
@@ -13,7 +11,9 @@ public abstract class Animal {
     private int positionX = 0;
     private int positionY = 0;
     private Random random = new Random();
+    private final int RANDOM_DIRECTION = 4;
     private final int CHANCE_TO_BORN = 2;
+    private StringBuilder builder = new StringBuilder();
 
     public abstract void eat();
     public abstract void reproduction();
@@ -71,9 +71,13 @@ public abstract class Animal {
         return CHANCE_TO_BORN;
     }
 
+    public StringBuilder getBuilder() {
+        return builder;
+    }
+
     public Direction chooseTheWay() {
 
-        int direction = random.nextInt(4);
+        int direction = random.nextInt(RANDOM_DIRECTION);
         switch (direction) {
             case 0:
                 return Direction.LEFT;
@@ -90,10 +94,10 @@ public abstract class Animal {
 
 
     public String getPosition() {
-        for (int x = 0; x < Island.getIsland().length; x++) {
-            for (int y = 0; y < Island.getIsland()[x].length; y++) {
+        for (int x = 0; x < Island.getField().length; x++) {
+            for (int y = 0; y < Island.getField()[x].length; y++) {
 
-                for (Animal animal : Island.getIsland()[x][y]) {
+                for (Animal animal : Island.getField()[x][y]) {
                     if (animal == this) {
                         return x + " " + y;
                     }
@@ -102,5 +106,6 @@ public abstract class Animal {
         }
         return positionX + " " + positionY;
     }
+
 
 }

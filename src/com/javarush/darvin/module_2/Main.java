@@ -4,7 +4,8 @@ public class Main {
 
     public static void main(String[] args) {
         Island island = new Island();
-        Island.addObjectsIntoFields();
-        island.lifeCycle(1000);
+        Island.addCreatureIntoField();
+        island.lifeCycle(0);
+        Statistic.getStatistic();
     }
 }

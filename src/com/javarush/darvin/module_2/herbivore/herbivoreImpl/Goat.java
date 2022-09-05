@@ -11,5 +11,4 @@ public class Goat extends Herbivore {
         setMaxFoodForAnimal(10.0);
         setName("\uD83D\uDC10");
     }
-
 }

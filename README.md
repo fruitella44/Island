@@ -3,13 +3,10 @@
 
 > Class Animal is abstract
 >> Classes Predator, Herbivore extend Animal
->>> Classes: Bear, Eagle, Fox, Snake, Wolf ------- extend Predator
+>>> Classes: Bear, Eagle, Fox, Snake, Wolf >>> extend Predator
 > 
->>> Classes: Buffalo, Caterpillar, Deer, Duck, Goat, Hog, Horse, Mouse, Rabbit, Sheep ------- extend Herbivore
+>>> Classes: Buffalo, Caterpillar, Deer, Duck, Goat, Hog, Horse, Mouse, Rabbit, Sheep >>> extend Herbivore
 
-«This abstraction looks like» 
-
-![Example](https://imgur.com/a/tblOKeQ)
 
 ### Class Animal
 * Class Animal has abstract methods: eat(); reproduction;
@@ -38,3 +35,8 @@ If the current position of the Animal in Rectangle -> move works// or Animal can
 ### Class Plants 
 * Method reproduction(); generates new Plants every iteration of the Day
 
+### Class Statistic
+* Method getStatistic(); writes statistic on each iteration while Animal kills another Animal
+* Method printInfo(); draws the field with Animals
+
+* ![Example](https://disk.yandex.ru/i/KIWqU3C1lcdEhA)

@@ -11,5 +11,4 @@ public class Duck extends Herbivore {
         setMaxFoodForAnimal(0.15);
         setName("\uD83E\uDD86");
     }
-
 }

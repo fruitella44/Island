@@ -11,6 +11,4 @@ public class Deer extends Herbivore {
         setMaxFoodForAnimal(50.0);
         setName("\uD83E\uDD8C");
     }
-
-
 }

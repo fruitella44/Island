@@ -11,5 +11,4 @@ public class Mouse extends Herbivore {
         setMaxFoodForAnimal(0.01);
         setName("\uD83D\uDC01");
     }
-
 }

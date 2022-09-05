@@ -11,6 +11,4 @@ public class Snake extends Predator {
         setMaxFoodForAnimal(3.0);
         setName("\uD83D\uDC0D");
     }
-
-
 }
