@@ -7,13 +7,13 @@ import java.io.Serializable;
 
 public class Statistic implements Serializable {
 
-    public static void getStatistic() {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("statistic.txt"))) {
+    public static void getLog() {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("log.txt"))) {
 
             for (int x = 0; x < Island.getField().length; x++) {
                 for (int y = 0; y < Island.getField()[x].length; y++) {
-                    for (Animal animal : Island.getField()[x][y]) {
-                        writer.write(animal.getBuilder().toString());
+                    for (Animal creatures : Island.getField()[x][y]) {
+                        writer.write(creatures.getBuilder().toString());
                     }
                 }
             }

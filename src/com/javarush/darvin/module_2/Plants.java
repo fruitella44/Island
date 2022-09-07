@@ -6,7 +6,6 @@ public class Plants extends Animal {
     private String CURRENT_POSITION;
     private int POSITION_X;
     private int POSITION_Y;
-    private int counter;
 
     public Plants() {
         setWeight(1.0);
@@ -27,14 +26,12 @@ public class Plants extends Animal {
             for (int y = 0; y < Island.getField()[x].length; y++) {
 
                 for (Animal plant : Island.getField()[x][y]) {
-                    if (Island.getField()[x][y] == null && plant instanceof Plants && plant.getName().equals(this.getName())) {
+                    if (Island.getField()[x][y] == null && plant instanceof Plants) {
                         Island.getField()[POSITION_X][POSITION_Y].add(plant);
                     }
                 }
             }
         }
     }
-
-
 
 }

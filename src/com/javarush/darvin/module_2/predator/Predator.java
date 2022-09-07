@@ -13,7 +13,7 @@ public abstract class Predator extends Animal {
     private String CURRENT_POSITION;
     private int POSITION_X;
     private int POSITION_Y;
-    private int counter;
+    private int countAnimal;
 
     public void eat() {
         CURRENT_POSITION = getPosition();
@@ -29,22 +29,21 @@ public abstract class Predator extends Animal {
 
             if (!(animal instanceof Predator) && !(animal instanceof Plants)) {
                 copyAnimalList.remove(animal);
-                counter++;
+                setCountCreatures(countAnimal++);
 
                 getBuilder().append(animal.getName()).append(" has eaten by ").append(this.getName());
                 getBuilder().append("\n");
-                getBuilder().append("Animal was eaten ").append(counter);
+                getBuilder().append("Animal died ").append(countAnimal);
                 getBuilder().append("\n");
             }
         }
     }
-
     public void reproduction() {
         for (int x = 0; x < Island.getField().length; x++) {
             for (int y = 0; y < Island.getField()[x].length; y++) {
 
                 for (Animal animal : Island.getField()[x][y]) {
-                    if (Island.getField()[x][y] == null && animal instanceof Predator && animal.getName().equals(this.getName())) {
+                    if (Island.getField()[x][y] == null && animal instanceof Predator) {
 
                         switch (getRandom().nextInt(getCHANCE_TO_BORN())) {
                             case 0:

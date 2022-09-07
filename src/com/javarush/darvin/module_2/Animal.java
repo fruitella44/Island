@@ -1,5 +1,10 @@
 package com.javarush.darvin.module_2;
 
+import com.javarush.darvin.module_2.herbivore.Herbivore;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Random;
 
 public abstract class Animal {
@@ -14,6 +19,7 @@ public abstract class Animal {
     private final int RANDOM_DIRECTION = 4;
     private final int CHANCE_TO_BORN = 2;
     private StringBuilder builder = new StringBuilder();
+    private int countCreatures;
 
     public abstract void eat();
     public abstract void reproduction();
@@ -75,8 +81,11 @@ public abstract class Animal {
         return builder;
     }
 
-    public Direction chooseTheWay() {
+    public void setCountCreatures(int countCreatures) {
+        this.countCreatures = countCreatures;
+    }
 
+    public Direction chooseTheWay() {
         int direction = random.nextInt(RANDOM_DIRECTION);
         switch (direction) {
             case 0:
@@ -106,6 +115,5 @@ public abstract class Animal {
         }
         return positionX + " " + positionY;
     }
-
 
 }

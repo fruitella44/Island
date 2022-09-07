@@ -2,8 +2,8 @@ package com.javarush.darvin.module_2.herbivore;
 
 import com.javarush.darvin.module_2.Animal;
 import com.javarush.darvin.module_2.Island;
+import com.javarush.darvin.module_2.Statistic;
 import com.javarush.darvin.module_2.predator.Predator;
-
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -14,7 +14,7 @@ public abstract class Herbivore extends Animal {
     private String CURRENT_POSITION;
     private int POSITION_X;
     private int POSITION_Y;
-    private int counter;
+    private int countPlants;
 
     public void eat() {
         CURRENT_POSITION = getPosition();
@@ -30,15 +30,15 @@ public abstract class Herbivore extends Animal {
 
             if (!(animal instanceof Herbivore) && !(animal instanceof Predator)) {
                 copyAnimalList.remove(animal);
-                counter++;
+                setCountCreatures(countPlants++);
 
                 getBuilder().append(animal.getName()).append(" has eaten by ").append(this.getName());
                 getBuilder().append("\n");
-                getBuilder().append("Plants was eaten ").append(counter);
+                getBuilder().append("Plants has eaten ").append(countPlants);
                 getBuilder().append("\n");
-
             }
         }
+
     }
 
     public void reproduction() {
@@ -46,7 +46,7 @@ public abstract class Herbivore extends Animal {
             for (int y = 0; y < Island.getField()[x].length; y++) {
 
                 for (Animal animal : Island.getField()[x][y]) {
-                    if (Island.getField()[x][y] == null && animal instanceof Herbivore && animal.getName().equals(this.getName())) {
+                    if (Island.getField()[x][y] == null && animal instanceof Herbivore) {
 
                         switch (getRandom().nextInt(getCHANCE_TO_BORN())) {
                             case 0:
