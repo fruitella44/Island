@@ -21,7 +21,7 @@
 * Добавлен внутренний класс Rectangle, он необходим, чтобы во время движения животное не могло уйти за пределы поля.
 * Метод printInfo(); отрисовывает матрицу поля с уже заполнеными на острове растениями и животными. При первом запуске поле заполняется рандомно.
 * Пример как это выглядит:
-![output](https://downloader.disk.yandex.ru/preview/652c9605909a69e7a390763184cd25ee13bf565a99efd25aae0b7743be0809ce/6321ea2e/TDY_HwcmkYORhISaYQGqwO6pVpeKiIY0NqW4keaB7kyZsmzE_O3QToIUeA9YGuOizNq_TZxx6aBuL9ERgzG5Aw%3D%3D?uid=0&filename=animal.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&owner_uid=0&tknv=v2&size=2048x2048)
+![output](https://downloader.disk.yandex.ru/preview/59277a70513f110ca068480f96bf543899acac6b83a2ad810eaa99d67a39c10c/63298dd2/TDY_HwcmkYORhISaYQGqwO6pVpeKiIY0NqW4keaB7kyZsmzE_O3QToIUeA9YGuOizNq_TZxx6aBuL9ERgzG5Aw%3D%3D?uid=0&filename=animal.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&owner_uid=0&tknv=v2&size=2048x2048)
 * Метод move(); проверяет границы животного перед каждым его движением, иначе будет поймано исключение ArrayIndexOutOfBoundsException
 * Во время движения вызывается текущая позиция животного. Каждое животное имеет индвидуальную скорость передвижения по клеткам. Если во время движения nextPosition будет выходить за пределы поля, то животное останеться на месте.
 * Для запуска программы используется ExecutorService.
